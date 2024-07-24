@@ -1,22 +1,58 @@
-<?php
-session_start();
-
-// Check if the user is logged in, if not then redirect them to the login page
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: login.html");
-    exit;
-}
-?>
-
+<?php include 'admin_logic.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="admin_scripts.js"></script>
     <title>Admin Dashboard</title>
 </head>
 <body>
     <h1>Welcome, <?php echo htmlspecialchars($_SESSION["username"]); ?>!</h1>
     <p>This is the admin dashboard.</p>
-    <a href="logout.php">Logout</a>
+    <a href="admin_logout.php">Logout</a>
+    <table id="patient_table">
+    <th>
+        Patient Name
+    </th>
+    <th>
+        Severity Level
+    </th>
+    <th>
+        Time of Arrival
+    </th>
+    <th>
+        Code
+    </th>
+    <th>
+        Time in Queue
+    </th>
+</table>
+
+<form id='patientForm'>
+        <div>
+            <label for="patient_name">Patient Name:</label>
+            <input type="text" id="patient_name" name="patient_name" required>
+        </div>
+        <div>
+            <label for="severity_level">Severity Level:</label>
+            <select id="severity_level" name="severity_level" required>
+                <option value="" disabled selected>Select a level</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+        </div>
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+
+<form>
 </body>
 </html>
