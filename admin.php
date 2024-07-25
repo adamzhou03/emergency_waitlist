@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <script src="admin_scripts.js"></script>
     <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Welcome, <?php echo htmlspecialchars($_SESSION["username"]); ?>!</h1>
-    <p>This is the admin dashboard.</p>
+    <p id="admin_titles">This is the admin dashboard.</p>
     <a href="admin_logout.php">Logout</a>
     <table id="patient_table">
     <th>
@@ -30,6 +31,10 @@
 
 <form id='patientForm'>
         <div>
+            <br>
+            <p id="admin_titles">Patient Form</p>
+        </div>
+        <div>
             <label for="patient_name">Patient Name:</label>
             <input type="text" id="patient_name" name="patient_name" required>
         </div>
@@ -50,6 +55,7 @@
             </select>
         </div>
         <div>
+            <br>
             <button type="submit">Submit</button>
         </div>
 

@@ -1,0 +1,53 @@
+#patient_table {
+    border: 2px solid;
+    border-radius: 3px;
+}
+
+th {
+    padding: 12px 15px;
+    border: 2px solid;
+    text-align: center;
+    background-color: aliceblue;
+}
+
+td {
+    padding: 12px 15px;
+    border: 2px solid;
+    text-align: center;
+    background-color: rgb(202, 232, 245);
+}
+
+#admin_titles, #user_titles{
+    display: inline-flex;
+    font-size: large;
+    font-weight: 100;
+    text-transform: uppercase;
+    padding: 5px;
+    border-radius: 3px;
+    background-color: rgb(202, 232, 245);
+    border-style: solid;
+
+}
+
+#severity_level, #patient_name, #username, #user_name, #password, #code{
+    background-color: rgb(202, 232, 245);
+    border: 1px solid;
+}
+
+button{
+    background-color: #7bbaf1;
+    display: inline-block;
+    border: 2px solid;
+    border-radius: 4px;
+    padding: 8px;
+}
+
+h1, h2{
+    text-decoration: underline;
+    padding: 60px;
+    text-align: center;
+    background: #009678;
+    color: white;
+    font-size: 30px;
+    border-radius: 5px;
+}

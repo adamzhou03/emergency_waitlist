@@ -5,6 +5,7 @@
 <head>
 <meta charset = 'UTF-8'>
 <title>User Login</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <h2>User Login</h2>
