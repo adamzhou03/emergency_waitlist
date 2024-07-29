@@ -33,25 +33,30 @@ async function getPatients() {
         
                 let currentTime = new Date();
                 let timeDifferenceInSeconds = Math.floor((Math.abs(currentTime - timeOfArrival)) / 1000);
+
+                function createTimer(cell) {
+                    setInterval(countTimer, 1000);
         
-                setInterval(countTimer, 1000);
-        
-                var totalSeconds = timeDifferenceInSeconds;
-                function countTimer() {
-                    ++totalSeconds;
-                    
-                    var hour = Math.floor(totalSeconds / 3600);
-                    var minute = Math.floor((totalSeconds - hour * 3600) / 60);
-                    var seconds = totalSeconds - (hour * 3600 + minute * 60);
-                    if (hour < 10)
-                        hour = "0" + hour;
-                    if (minute < 10)
-                        minute = "0" + minute;
-                    if (seconds < 10)
-                        seconds = "0" + seconds;
-        
-                    timer_cell.innerHTML = hour + ":" + minute + ":" + seconds;
+                    var totalSeconds = timeDifferenceInSeconds;
+                    function countTimer() {
+                        ++totalSeconds;
+                        
+                        var hour = Math.floor(totalSeconds / 3600);
+                        var minute = Math.floor((totalSeconds - hour * 3600) / 60);
+                        var seconds = totalSeconds - (hour * 3600 + minute * 60);
+                        if (hour < 10)
+                            hour = "0" + hour;
+                        if (minute < 10)
+                            minute = "0" + minute;
+                        if (seconds < 10)
+                            seconds = "0" + seconds;
+            
+                        cell.innerHTML = hour + ":" + minute + ":" + seconds;
+                    }
                 }
+
+                createTimer(timer_cell);
+                
                 
                 let remove_cell = document.createElement('td');
                 row.appendChild(remove_cell);
@@ -97,20 +102,17 @@ async function addPatient(event) {
     var req = new XMLHttpRequest();
 
     req.onreadystatechange = function () {
-        console.log(this.readyState);
+        getPatients();
         if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText); 
-            getPatients();
+            
         }
     }
     let time_of_arrival = new Date().toISOString();
-    console.log(time_of_arrival);
-
     var req = new XMLHttpRequest();
     const url = `admin_logic.php?action=addPatient&patient_name=${patient_name}&severity_level=${severity_level}&time_of_arrival=${time_of_arrival}`;
-    req.open("GET", url, true);
-    console.log(url);
+    req.open("POST", url, true);
     req.send();
+    getPatients();
 }
 
 async function removePatient(patient_id) {
@@ -120,7 +122,6 @@ async function removePatient(patient_id) {
     req.onreadystatechange = function () {
         
         if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText); 
             getPatients();
         }
     }

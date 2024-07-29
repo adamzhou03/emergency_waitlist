@@ -69,13 +69,13 @@ function addPatient($patient_name, $severity_level, $time_of_arrival) {
     $stmt = $conn->prepare("INSERT INTO patients (patient_name, 
     severity_level, time_of_arrival, code) VALUES (?, ?, ?, ?)");
     $code = 'ttt';
-    $stmt->bind_param("siss", $patient_name, $severity_level, $time_of_arrival, $code);   
-
+    $stmt->bind_param("siss", $patient_name, $severity_level, $time_of_arrival, $code);  
     $stmt->execute();  
-    
     $stmt->close();
+    $conn->close();
+
     $response = $patient_id;
-    echo $patient_id;
+    echo $response;
     exit;
 }
 
@@ -89,6 +89,7 @@ function removePatient($patient_id) {
     $stmt->bind_param("i", $patient_id);
     $stmt->execute();
     $stmt->close();
+    $conn->close();
     echo $response = $patient_id;
     exit;
 }
