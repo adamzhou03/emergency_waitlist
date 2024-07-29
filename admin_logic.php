@@ -14,7 +14,7 @@ $db_name = "hospital_triage";
 
 // Check if the user is logged in, if not then redirect them to the login page
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: login.html");
+    header("location: admin_login.php");
     exit;
 }
 
@@ -67,11 +67,12 @@ function addPatient($patient_name, $severity_level, $time_of_arrival) {
         die("Connection failed: " . $conn->connect_error);
     }
     $stmt = $conn->prepare("INSERT INTO patients (patient_name, 
-    severity_level, time_of_arrival, code) VALUES (?, ?, ?, ?)");
-    $code = 'ttt';
-    $stmt->bind_param("siss", $patient_name, $severity_level, $time_of_arrival, $code);  
+    severity_level, time_of_arrival) VALUES (?, ?, ?)");
+    $stmt->bind_param("sis", $patient_name, $severity_level, $time_of_arrival);  
     $stmt->execute();  
-    $stmt->close();
+    $stmt->close(); 
+    $stmt = $conn->prepare("CALL update_queue_numbers();");
+    $stmt->execute();  
     $conn->close();
 
     $response = $patient_id;
@@ -89,6 +90,8 @@ function removePatient($patient_id) {
     $stmt->bind_param("i", $patient_id);
     $stmt->execute();
     $stmt->close();
+    $stmt = $conn->prepare("CALL update_queue_numbers();");
+    $stmt->execute();
     $conn->close();
     echo $response = $patient_id;
     exit;
