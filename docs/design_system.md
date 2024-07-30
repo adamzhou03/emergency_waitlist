@@ -17,16 +17,16 @@ Blue (#7bbaf1) is used for buttons. Green (#009678) is used for all page headers
 
 ###Header
 
-![Header] (assets/design_system/header.png)
+![Header](assets/design_system/header.png)
 
 ###Pages
 
-![Main] (assets/design_system/main.png)
+![Main](assets/design_system/main.png)
 
-![Admin Login] (assets/design_system/adminLogin.png)
+![AdminLogin](assets/design_system/adminLogin.png)
 
-![Admin Page] (assets/design_system/admingPage.png)
+![AdminPage](assets/design_system/admingPage.png)
 
-![User Login] (assets/design_system/userLogin.png)
+![UserLogin](assets/design_system/userLogin.png)
 
-![User Page] (assets/design_system/userPage.png)
+![UserPage](assets/design_system/userPage.png)
