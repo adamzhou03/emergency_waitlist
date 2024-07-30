@@ -21,9 +21,6 @@ async function getPatients() {
                 let severity_cell = document.createElement('td');
                 severity_cell.innerHTML = patient['severity_level'];
         
-                let arrival_cell = document.createElement('td');
-                arrival_cell.innerHTML = patient['time_of_arrival'];
-        
                 let code_cell = document.createElement('td');
                 code_cell.innerHTML = patient['code'];
         
@@ -32,6 +29,14 @@ async function getPatients() {
                 timeOfArrival = new Date(patient['time_of_arrival']);
         
                 let currentTime = new Date();
+
+                let offset = currentTime.getTimezoneOffset()/60;
+
+                timeOfArrival.setHours(timeOfArrival.getHours() - offset);
+
+                let arrival_cell = document.createElement('td');
+                arrival_cell.innerHTML = timeOfArrival;
+
                 let timeDifferenceInSeconds = Math.floor((Math.abs(currentTime - timeOfArrival)) / 1000);
 
                 function createTimer(cell) {
@@ -92,7 +97,7 @@ async function removeClickHandler(id) {
     removePatient(id);
 }
 
-async function addPatient(event) {
+function addPatient(event) {
     event.preventDefault(); // Prevent the form from submitting normally
             
     // Get the form input values
@@ -108,6 +113,11 @@ async function addPatient(event) {
         }
     }
     let time_of_arrival = new Date().toISOString();
+
+    console.log(new Date());
+
+    console.log(time_of_arrival);
+
     var req = new XMLHttpRequest();
     const url = `admin_logic.php?action=addPatient&patient_name=${patient_name}&severity_level=${severity_level}&time_of_arrival=${time_of_arrival}`;
     req.open("POST", url, true);
