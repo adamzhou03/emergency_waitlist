@@ -11,6 +11,29 @@ async function getPatients() {
     req.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) { 
             var patients = JSON.parse(this.responseText);
+            let head = document.createElement('tr');
+            let name_head = document.createElement('td');
+            let severity_head = document.createElement('td');
+            let arrival_head = document.createElement('td');
+            let code_head = document.createElement('td');
+            let timer_head = document.createElement('td');
+            let remove_head = document.createElement('td');
+
+            name_head.innerHTML = "Name";
+            severity_head.innerHTML = "Severity";
+            arrival_head.innerHTML = "Arrival Time";
+            code_head.innerHTML = "Patient Code";
+            timer_head.innerHTML = "Time in Queue";
+            remove_head.innerHTML = "";
+
+            head.appendChild(name_head);
+            head.appendChild(severity_head);
+            head.appendChild(arrival_head);
+            head.appendChild(code_head);
+            head.appendChild(timer_head);
+            head.appendChild(remove_head);
+
+            patient_table.appendChild(head);
 
             for (let patient of patients) {
                 let row = document.createElement('tr');

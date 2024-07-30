@@ -11,23 +11,8 @@
     <h1>Welcome, <?php echo htmlspecialchars($_SESSION["username"]); ?>!</h1>
     <p id="admin_titles">This is the admin dashboard.</p>
     <a href="admin_logout.php">Logout</a>
-    <table id="patient_table">
-    <th>
-        Patient Name
-    </th>
-    <th>
-        Severity Level
-    </th>
-    <th>
-        Time of Arrival
-    </th>
-    <th>
-        Code
-    </th>
-    <th>
-        Time in Queue
-    </th>
-</table>
+    <table id="patient_table">   
+    </table>
 
 <form id='patientForm'>
         <div>
