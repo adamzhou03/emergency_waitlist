@@ -37,6 +37,8 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' ) {
         echo $db_code;
         echo $queue_number;
         $stmt->fetch();
+        $wait_time = strval($queue_number * 15);
+        $wait_time .= " mins";
 
         // Verify password
         if ( $stmt->num_rows == 1 && $code == $db_code ) {
@@ -46,6 +48,7 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' ) {
             $_SESSION[ 'code' ] = $code;
             $_SESSION[ 'patient_id' ] = $patient_id;
             $_SESSION[ 'queue_number' ] = $queue_number;
+            $_SESSION[ 'est_wait_time' ] = $wait_time;
 
             // Redirect to user dashboard
             header( 'location: user.php' );
