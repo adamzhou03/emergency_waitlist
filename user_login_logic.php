@@ -27,14 +27,15 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' ) {
         $code = $_POST[ 'code' ];
 
         // Prepare and bind
-        $stmt = $conn->prepare( 'SELECT patient_name, code, patient_id FROM patients WHERE patient_name = ?' );
+        $stmt = $conn->prepare( 'SELECT patient_name, code, patient_id, queue_number FROM patients WHERE patient_name = ?' );
         $stmt->bind_param( 's', $user_name );
         $stmt->execute();
         $stmt->store_result();
-        $stmt->bind_result( $patient_name, $db_code, $patient_id );
+        $stmt->bind_result( $patient_name, $db_code, $patient_id, $queue_number );
         echo $patient_name;
         echo $patient_id;
         echo $db_code;
+        echo $queue_number;
         $stmt->fetch();
 
         // Verify password
@@ -44,6 +45,7 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' ) {
             $_SESSION[ 'patient_name' ] = $patient_name;
             $_SESSION[ 'code' ] = $code;
             $_SESSION[ 'patient_id' ] = $patient_id;
+            $_SESSION[ 'queue_number' ] = $queue_number;
 
             // Redirect to user dashboard
             header( 'location: user.php' );
